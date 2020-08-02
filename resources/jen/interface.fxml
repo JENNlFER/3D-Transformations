@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="596.0" minWidth="838.0" prefHeight="729.0" prefWidth="1119.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jen.Controller">
+   <top>
+      <MenuBar prefWidth="988.0" BorderPane.alignment="CENTER">
+        <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem id="Import" fx:id="Import" mnemonicParsing="false" onAction="#Import" text="Import" />
+                  <MenuItem id="Export" fx:id="Export" mnemonicParsing="false" onAction="#Export" text="Export" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Transformations">
+            <items>
+                  <Menu id="New" mnemonicParsing="false" text="New">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#Translation3D" text="Translation" />
+                        <MenuItem mnemonicParsing="false" onAction="#Scale3D" text="Scale" />
+                        <MenuItem mnemonicParsing="false" onAction="#Rotation3D" text="Rotation" />
+                     </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#Apply3D" text="Apply" />
+                  <MenuItem id="Delete" mnemonicParsing="false" onAction="#Delete3D" text="Clear" />
+                  <Menu mnemonicParsing="false" text="2D">
+                    <items>
+                        <Menu id="New" mnemonicParsing="false" text="New">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#Translation2D" text="Translation" />
+                              <MenuItem mnemonicParsing="false" onAction="#Scale2D" text="Scale" />
+                              <MenuItem mnemonicParsing="false" onAction="#Rotation2D" text="Rotation" />
+                          </items>
+                        </Menu>
+                        <MenuItem id="Delete" mnemonicParsing="false" onAction="#Apply2D" text="Apply" />
+                        <MenuItem id="Delete" mnemonicParsing="false" onAction="#Delete2D" text="Clear" />
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Algorithm">
+              <items>
+                  <RadioMenuItem id="Bresenham" fx:id="Simple" mnemonicParsing="false" onAction="#Simple" text="Simple">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="algorithms" />
+                     </toggleGroup>
+                  </RadioMenuItem>
+                  <RadioMenuItem id="Simple" fx:id="Bresenham" mnemonicParsing="false" onAction="#Bresenham" selected="true" text="Bresenham" toggleGroup="$algorithms" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Generation">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#HouseFar3D" text="House [Far] (100, -105, 2085)" />
+                  <MenuItem mnemonicParsing="false" onAction="#HouseClose3D" text="House [Close] (100, -105, 85)" />
+                  <MenuItem mnemonicParsing="false" onAction="#Random3D" text="Random (0, 0, 5000)" />
+                  <MenuItem mnemonicParsing="false" onAction="#Cone3D" text="Cone (450, 350, 5000)" />
+                  <Menu mnemonicParsing="false" text="2D">
+                    <items>
+                    <MenuItem id="Random" mnemonicParsing="false" onAction="#Random2D" text="Random (450, 300)" />
+                        <MenuItem id="Spectrum" fx:id="Spectrum" mnemonicParsing="false" onAction="#Spectrum2D" text="Spectrum (450, 300)" />
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Canvas">
+            <items>
+                  <Menu mnemonicParsing="false" text="Color">
+                    <items>
+                        <RadioMenuItem fx:id="White" mnemonicParsing="false" onAction="#White" styleClass="White" text="White">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="color" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem fx:id="Black" mnemonicParsing="false" onAction="#Black" selected="true" styleClass="Black" text="Black" toggleGroup="$color" />
+                    </items>
+                  </Menu>
+                  <MenuItem id="Clear" fx:id="Clear" mnemonicParsing="false" onAction="#Clear" text="Clear" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-border-width: 0px 1px 0px 0px;" BorderPane.alignment="CENTER">
+         <right>
+            <ScrollPane focusTraversable="false" hbarPolicy="NEVER" maxHeight="470.0" pannable="true" prefHeight="470.0" prefWidth="218.0" style="-fx-box-border: transparent;" vbarPolicy="ALWAYS">
+              <content>
+                <AnchorPane style="-fx-border-width: 0 0 0 0;">
+                     <children>
+                        <VBox id="Transformations" fx:id="Transformations" prefHeight="653.0" prefWidth="200.0" style="-fx-border-radius: 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </ScrollPane>
+         </right>
+         <top>
+            <TabPane focusTraversable="false" prefHeight="230.0" prefWidth="218.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="52.0" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="3D Matrix">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="192.0">
+                           <children>
+                              <GridPane id="Matrix" fx:id="Matrix3D" alignment="CENTER" gridLinesVisible="true" layoutX="16.0" layoutY="5.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="187.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="3" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="41.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="2D Matrix">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane id="Matrix" fx:id="Matrix2D" alignment="CENTER" gridLinesVisible="true" layoutX="39.0" layoutY="29.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="140.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label styleClass="small-font" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="46.0" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                 </children>
+
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Settings">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="218.0">
+                           <children>
+                              <VBox layoutX="25.0" layoutY="-16.0" prefHeight="186.0" prefWidth="218.0" AnchorPane.bottomAnchor="-19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="Sx">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderSx" blockIncrement="0.01" min="10.48" prefHeight="16.0" prefWidth="128.0" value="10.48">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueSx" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="10.48">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="Sy">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderSy" blockIncrement="0.01" min="7.94" prefHeight="16.0" prefWidth="128.0" value="7.94">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueSy" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="7.94">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="D">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderD" blockIncrement="0.01" max="200.0" min="1.0" prefHeight="16.0" prefWidth="128.0" value="50.0">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueD" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="50.00">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="Vx">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderVx" blockIncrement="1.0" max="1000.0" prefHeight="16.0" prefWidth="128.0" value="450.0">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueVx" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="450">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="Vy">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderVy" blockIncrement="1.0" max="1000.0" prefHeight="16.0" prefWidth="128.0" value="350.0">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueVy" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="350">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="Cx">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderCx" blockIncrement="1.0" max="1000.0" min="-1000.0" prefHeight="16.0" prefWidth="128.0" value="450.0">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueCx" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="450">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="6.0" prefWidth="218.0">
+                                       <children>
+                                          <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="27.0" text="Cy">
+                                             <padding>
+                                                <Insets left="3.0" />
+                                             </padding>
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Slider fx:id="SliderCy" blockIncrement="1.0" max="1000.0" min="-1000.0" prefHeight="16.0" prefWidth="128.0" value="350.0">
+                                             <HBox.margin>
+                                                <Insets top="4.0" />
+                                             </HBox.margin>
+                                          </Slider>
+                                          <TextField fx:id="ValueCy" alignment="CENTER" editable="false" prefHeight="17.0" prefWidth="46.0" text="350">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </top>
+      </BorderPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="Background" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER_RIGHT" layoutX="834.0" layoutY="677.0" prefHeight="22.0" prefWidth="61.0" text="900 x 700" />
+            <Canvas id="Canvas" fx:id="Canvas" height="700.0" width="900.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
