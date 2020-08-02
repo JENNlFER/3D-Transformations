@@ -15,9 +15,6 @@ public class Rainbow
         this(1);
     }
 
-    /**
-     * @param speed How many unique colors to skip forward at a time.
-     */
     public Rainbow(int speed) {
         this.speed = speed;
     }

@@ -93,10 +93,8 @@ public class Rotate3D extends Transformation3D {
     }
 
     public void setAxis(Axis axis) {
-        System.out.println(matrix.toString());
         changeAxis(axis);
         radians(radians);
-        System.out.println(matrix.toString());
     }
 
     public Axis getAxis() {
